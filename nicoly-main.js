@@ -371,29 +371,7 @@
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 })();
 
-/* ─── Galeria — upload de fotos ─── */
-window.triggerUpload = function(card) {
-  const input = card.querySelector('input[type="file"]');
-  if (input) input.click();
-};
 
-window.loadPhoto = function(input) {
-  const card = input.closest('.photo-card');
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const ph = card.querySelector('.photo-placeholder');
-    if (ph) ph.style.display = 'none';
-    let img = card.querySelector('img');
-    if (!img) {
-      img = document.createElement('img');
-      card.insertBefore(img, card.querySelector('.photo-label'));
-    }
-    img.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
-};
 
 /* ─────────────────────────────────────────────────────────
    MAPA INTERATIVO
