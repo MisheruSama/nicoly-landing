@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Nicoly ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;600&family=Lato:wght@100;300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="nicoly-style.css" />
+
+  <!-- Keyframes das lanternas (dependem de CSS vars definidas no JS) -->
+  <style>
+    @keyframes floatLantern {
+      0%   { opacity:0;   transform: translateY(0)      translateX(0)                    rotate(var(--tilt,0deg)); }
+      7%   { opacity:1; }
+      88%  { opacity:.75; }
+      100% { opacity:0;   transform: translateY(-108vh) translateX(var(--drift,25px))    rotate(calc(var(--tilt,0deg) + 6deg)); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Cursor personalizado -->
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<!-- Estrelas (fundo fixo global) -->
+<div class="stars-layer"></div>
+
+<!-- Lanternas SVG flutuando (fundo fixo global) -->
+<div id="lantern-layer" style="position:fixed;inset:0;pointer-events:none;z-index:0;"></div>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-river"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">dois meses juntos</p>
+
+    <h1 class="hero-name">Nicoly</h1>
+
+    <div class="ornament hero-ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line"></div>
+    </div>
+
+    <p class="hero-date">26 de fevereiro &middot; 26 de abril</p>
+    <p class="hero-months">dois meses de felicidade</p>
+    <p class="hero-phrase">&ldquo;Você tem sido a <em>benção</em> que me enriquece.&rdquo;</p>
+    
+    <button class="hero-button" id="playMusicBtn">Vamos juntos ✦</button>
+  </div>
+
+  <audio id="backgroundMusic" style="display:none;">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>rolar</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     GALERIA
+══════════════════════════════════════════ -->
+<section class="section" id="galeria">
+  <p class="section-eyebrow reveal">nossas memórias</p>
+  <h2 class="section-title reveal">Momentos nossos</h2>
+  <div class="ornament reveal">
+    <div class="ornament-line"></div>
+    <div class="ornament-diamond"></div>
+    <div class="ornament-line"></div>
+  </div>
+  <p class="section-sub reveal">cada foto, um pedacinho do que construímos juntos</p>
+
+  <div class="gallery-grid reveal">
+
+    <!-- Foto 1 -->
+    <div class="photo-card" onclick="triggerUpload(this)">
+      <input type="file" accept="image/*" onchange="loadPhoto(this)" />
+      <div class="photo-placeholder">
+        <div class="placeholder-ring">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <p>adicionar foto</p>
+      </div>
+      <div class="photo-corner pc-tl"></div>
+      <div class="photo-corner pc-tr"></div>
+      <div class="photo-corner pc-bl"></div>
+      <div class="photo-corner pc-br"></div>
+      <div class="photo-label">nossa primeira foto juntos</div>
+    </div>
+
+    <!-- Foto 2 -->
+    <div class="photo-card" onclick="triggerUpload(this)">
+      <input type="file" accept="image/*" onchange="loadPhoto(this)" />
+      <div class="photo-placeholder">
+        <div class="placeholder-ring">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <p>adicionar foto</p>
+      </div>
+      <div class="photo-corner pc-tl"></div>
+      <div class="photo-corner pc-tr"></div>
+      <div class="photo-corner pc-bl"></div>
+      <div class="photo-corner pc-br"></div>
+      <div class="photo-label">um dos nossos momentos favoritos</div>
+    </div>
+
+    <!-- Foto 3 -->
+    <div class="photo-card" onclick="triggerUpload(this)">
+      <input type="file" accept="image/*" onchange="loadPhoto(this)" />
+      <div class="photo-placeholder">
+        <div class="placeholder-ring">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <p>adicionar foto</p>
+      </div>
+      <div class="photo-corner pc-tl"></div>
+      <div class="photo-corner pc-tr"></div>
+      <div class="photo-corner pc-bl"></div>
+      <div class="photo-corner pc-br"></div>
+      <div class="photo-label">felizes como sempre</div>
+    </div>
+
+    <!-- Foto 4 -->
+    <div class="photo-card" onclick="triggerUpload(this)">
+      <input type="file" accept="image/*" onchange="loadPhoto(this)" />
+      <div class="photo-placeholder">
+        <div class="placeholder-ring">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <p>adicionar foto</p>
+      </div>
+      <div class="photo-corner pc-tl"></div>
+      <div class="photo-corner pc-tr"></div>
+      <div class="photo-corner pc-bl"></div>
+      <div class="photo-corner pc-br"></div>
+      <div class="photo-label">você que faz tudo mais bonito</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CARTA
+══════════════════════════════════════════ -->
+<section class="section" id="carta">
+  <p class="section-eyebrow reveal">do meu coração</p>
+  <h2 class="section-title reveal">Minha carta pra você</h2>
+  <div class="ornament reveal">
+    <div class="ornament-line"></div>
+    <div class="ornament-diamond"></div>
+    <div class="ornament-line"></div>
+  </div>
+  <br>
+
+  <div class="letter-wrap reveal">
+    <!-- Lanternas decorativas SVG embutidas (pequenas, nos cantos do papel) -->
+    <div class="letter-deco-lantern tl">
+      <svg width="36" height="54" viewBox="0 0 36 54" fill="none">
+        <line x1="18" y1="0"  x2="18" y2="9"  stroke="#f0c060" stroke-width="1" opacity=".7"/>
+        <ellipse cx="18" cy="28" rx="13" ry="18" fill="#f5c842" opacity=".9"/>
+        <ellipse cx="18" cy="28" rx="13" ry="18" fill="none" stroke="#c8963c" stroke-width="1" opacity=".6"/>
+        <line x1="18" y1="46" x2="18" y2="54" stroke="#c8963c" stroke-width="1" opacity=".5"/>
+      </svg>
+    </div>
+    <div class="letter-deco-lantern br">
+      <svg width="36" height="54" viewBox="0 0 36 54" fill="none">
+        <line x1="18" y1="0"  x2="18" y2="9"  stroke="#f0c060" stroke-width="1" opacity=".7"/>
+        <ellipse cx="18" cy="28" rx="13" ry="18" fill="#f5c842" opacity=".9"/>
+        <ellipse cx="18" cy="28" rx="13" ry="18" fill="none" stroke="#c8963c" stroke-width="1" opacity=".6"/>
+        <line x1="18" y1="46" x2="18" y2="54" stroke="#c8963c" stroke-width="1" opacity=".5"/>
+      </svg>
+    </div>
+
+    <div class="letter-paper">
+      <p class="letter-header">Para Nicoly, minha cacheada ✦</p>
+
+      <div class="letter-body">
+        <p>
+          Esse tempo com você parece que já é uma vida, porque estar com você é prazeroso demais.
+          Parece que já estamos juntos há anos — e mesmo assim, cada dia ainda me surpreende.
+        </p>
+        <p>
+          Eu amo o jeito que você <strong>busca me entender</strong>, que me apoia,
+          e principalmente seu jeito divertido que sempre me faz rir,
+          não importa a circunstância. Sua risada é o meu lugar favorito.
+        </p>
+        <p>
+          Amo sua <strong>fé</strong>, seu amor pelas almas, e como você sempre dá o seu melhor
+          em tudo que faz. Isso me inspira todo dia.
+        </p>
+        <p>
+          Esses dois meses têm sido um <strong>privilégio</strong>. Têm sido uma bênção,
+          porque tenho visto como a vontade de Deus é boa, perfeita e agradável.
+        </p>
+        <p>
+          Você não é só minha namorada — você é a mulher com quem eu tenho certeza
+          que vou passar a vida ao lado. Que será <strong>minha esposa</strong>.
+          Esse é o meu objetivo com você. Não estou vendo se você é pra casar —
+          você me deu essa certeza há muito tempo.
+          Eu encontrei em você a minha esposa.
+        </p>
+        <p>
+          E como a Palavra diz: <em>&ldquo;Quem encontra uma esposa alcançou o favor do Senhor.&rdquo;</em>
+        </p>
+      </div>
+
+      <div class="letter-footer">
+        <span>com todo meu amor,</span>
+        <strong>Seu namorado ✦</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     MAPA INTERATIVO
+══════════════════════════════════════════ -->
+<section class="section" id="lugares">
+  <p class="section-eyebrow reveal">os nossos lugares</p>
+  <h2 class="section-title reveal">Onde nossa história acontece</h2>
+  <div class="ornament reveal">
+    <div class="ornament-line"></div>
+    <div class="ornament-diamond"></div>
+    <div class="ornament-line"></div>
+  </div>
+  <p class="section-sub reveal">cada lugar guarda um pedaço de nós</p>
+
+  <div class="map-container reveal">
+
+    <!-- Mapa SVG ilustrado -->
+    <div class="map-viewport">
+      <div class="map-bg"></div>
+      
+      <!-- World Map SVG -->
+      <svg class="world-map" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background oceano -->
+        <rect width="1000" height="600" fill="rgba(45,80,150,.3)"/>
+        
+        <!-- Continentes com cores realistas -->
+        <!-- North America -->
+        <path d="M80,80 L150,60 L180,120 L200,200 L140,210 L90,160 Z" fill="rgba(100,140,80,.5)" stroke="rgba(150,180,120,.4)" stroke-width="1.5"/>
+        
+        <!-- South America -->
+        <path d="M150,200 L200,190 L220,380 L160,390 Z" fill="rgba(100,140,80,.5)" stroke="rgba(150,180,120,.4)" stroke-width="1.5"/>
+        
+        <!-- Greenland -->
+        <path d="M200,40 L240,35 L250,100 L210,95 Z" fill="rgba(100,140,80,.4)" stroke="rgba(150,180,120,.4)" stroke-width="1"/>
+        
+        <!-- Europe -->
+        <path d="M380,100 L450,90 L470,180 L420,190 L370,150 Z" fill="rgba(100,140,80,.5)" stroke="rgba(150,180,120,.4)" stroke-width="1.5"/>
+        
+        <!-- Africa -->
+        <path d="M420,190 L500,180 L550,420 L480,440 L400,350 Z" fill="rgba(140,120,90,.5)" stroke="rgba(180,160,120,.4)" stroke-width="1.5"/>
+        
+        <!-- Middle East -->
+        <path d="M500,180 L570,170 L580,260 L520,280 Z" fill="rgba(140,120,90,.4)" stroke="rgba(180,160,120,.3)" stroke-width="1"/>
+        
+        <!-- Asia -->
+        <path d="M550,90 L750,85 L800,180 L750,260 L650,280 L580,170 Z" fill="rgba(100,140,80,.5)" stroke="rgba(150,180,120,.4)" stroke-width="1.5"/>
+        
+        <!-- Southeast Asia -->
+        <path d="M720,260 L800,250 L820,330 L760,340 Z" fill="rgba(100,140,80,.4)" stroke="rgba(150,180,120,.3)" stroke-width="1"/>
+        
+        <!-- Australia -->
+        <path d="M800,350 L880,340 L900,500 L840,510 Z" fill="rgba(100,140,80,.5)" stroke="rgba(150,180,120,.4)" stroke-width="1.5"/>
+        
+        <!-- New Zealand -->
+        <path d="M900,480 L930,475 L940,550 L915,555 Z" fill="rgba(100,140,80,.4)" stroke="rgba(150,180,120,.3)" stroke-width="1"/>
+        
+        <!-- Antarctica (em baixo) -->
+        <path d="M0,550 L1000,550 L1000,600 L0,600 Z" fill="rgba(200,200,220,.2)" stroke="none"/>
+      </svg>
+      
+      <div class="map-grid"></div>
+
+      <!-- Paths SVG entre lugares (preenchido pelo JS) -->
+      <svg class="map-paths" id="map-paths"
+           viewBox="0 0 100 100"
+           preserveAspectRatio="none"
+           style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;">
+      </svg>
+
+      <!-- Pins serão inseridos pelo JS -->
+
+      <!-- Bússola decorativa -->
+      <div class="map-compass">N</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="ornament reveal">
+    <div class="ornament-line" style="width:100px;"></div>
+    <div class="ornament-diamond"></div>
+    <div class="ornament-line" style="width:100px;"></div>
+  </div>
+  <br>
+  <p class="footer-name reveal">Nicoly</p>
+  <p class="footer-verse reveal">
+    &ldquo;Quem encontra uma esposa<br>encontrou algo precioso &mdash;<br>é uma bênção do Senhor.&rdquo;
+    <cite>&mdash; Provérbios 18:22</cite>
+  </p>
+  <p class="footer-hearts reveal">✦ ✦ ✦</p>
+  <p class="footer-caption reveal">26 de fevereiro &middot; 26 de abril &middot; e sempre</p>
+</footer>
+
+<script src="nicoly-main.js"></script>
+</body>
+</html>
